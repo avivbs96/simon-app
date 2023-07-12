@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_game"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/background"
+    tools:ignore="ExtraText">
+
+
+    <ImageView
+        android:layout_width="120dp"
+        app:srcCompat="@drawable/center"
+        android:id="@+id/imageView"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:clickable="false"
+        android:contentDescription="@string/start_text" />
+
+    <TextView
+        android:text="@string/_00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/score_textView"
+        android:textSize="65sp"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        />
+
+    <TableLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/tableLayout">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:weightSum="2">
+
+            <ImageButton
+                android:src="@drawable/green"
+                android:background="#00000000"
+                android:id="@+id/green_imageButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                android:contentDescription="@string/green_button"
+
+                />
+
+            <ImageButton
+                android:src="@drawable/blue"
+                android:background="#00000000"
+                android:id="@+id/blue_imageButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:contentDescription="@string/blue_button" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:weightSum="2">
+
+            <ImageButton
+                android:src="@drawable/yellow"
+                android:background="#00000000"
+                android:id="@+id/yellow_imageButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:contentDescription="@string/yellow_button" />
+
+            <ImageButton
+                android:src="@drawable/red"
+                android:background="#00000000"
+                android:id="@+id/red_imageButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:contentDescription="@string/red_button" />
+
+        </TableRow>
+    </TableLayout>
+
+    <ImageButton
+        android:id="@+id/menu_ImageButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:background="#00000000"
+        android:onClick="popupMenu"
+        android:padding="8dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/menu"
+        android:contentDescription="@string/menu_button"/>
+        />
+
+    <ImageButton
+        android:id="@+id/hint_imageButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="#00000000"
+        android:contentDescription="@string/hint_button"
+        android:elevation="0dp"
+        android:padding="8dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/hint" />
+    />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="29dp"
+        android:id="@+id/turn_textView"
+        android:textSize="30sp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="@string/textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gameMode_textView"
+        android:textSize="30sp"
+        android:layout_alignBottom="@+id/menu_ImageButton"
+        android:layout_centerHorizontal="true" />
+
+
+</RelativeLayout>

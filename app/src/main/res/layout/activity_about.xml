@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_about"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:background="@drawable/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/gameAbout_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp"
+            android:text="@string/gameModesString"
+            android:textAlignment="center"
+            android:textColor="#9FA8DA"
+            android:textSize="55sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/pattern_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10sp"
+            android:text="@string/patternString"
+            android:textColor="@color/gray_700"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:text="@string/patternInfoString"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/patternInfo"
+            android:layout_gravity="center"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="20sp"
+            android:textColor="@color/gray_700"
+            android:textSize="22sp"
+
+            />
+
+        <TextView
+            android:text="@string/randomString"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/random_TextView"
+            android:textColor="@color/blue_500"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginStart="10sp" />
+
+        <TextView
+            android:text="@string/randomInfoString"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/randomInfo"
+            android:layout_gravity="center"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="20sp"
+            android:textColor="@color/gray_700"
+            android:textSize="22sp" />
+
+        <TextView
+            android:text="@string/reverseString"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/reverse_TextView"
+            android:textColor="@color/green_700"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginStart="10sp" />
+
+        <TextView
+            android:text="@string/reverseInfoString"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/reverseInfo"
+            android:layout_gravity="center"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="20sp"
+            android:textColor="@color/gray_700"
+            android:textSize="22sp" />
+
+        <TextView
+            android:text="@string/noteString"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/note_TextView"
+            android:textColor="@color/orange_500"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginStart="10sp" />
+
+        <TextView
+            android:text="@string/noteInfoString"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/noteInfo"
+            android:layout_gravity="center"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="20sp"
+            android:textColor="@color/gray_700"
+            android:textSize="22sp" />
+
+    </LinearLayout>
+</ScrollView>

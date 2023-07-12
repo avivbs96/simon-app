@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Simon</string>
+    <string name="defaultText">Default</string>
+    <string name="congrats">Congrats!</string>
+    <string name ="nameHint">Name:</string>
+    <string name ="highScore">High Scores</string>
+    <string name ="gameModesString">Game Modes</string>
+    <string name ="patternString">Pattern Mode</string>
+    <string name ="patternInfoString">A predetermined pattern that will always stays the same. Try to memorize all 99!</string>
+    <string name ="randomString">Random Mode</string>
+    <string name ="randomInfoString">The classic Simon game mode. \nYou get double the points!</string>
+    <string name ="reverseString">Reverse Mode</string>
+    <string name ="reverseInfoString">Ready for a challenge? Input the pattern backwards! You get triple the points!</string>
+    <string name ="noteString">Note</string>
+    <string name ="noteInfoString">Leaving the game screen will restart the game!</string>
+    <string name="start_text">Start Button</string>
+    <string name="_00">00</string>
+    <string name="green_button">Green Button</string>
+    <string name="blue_button">Blue Button</string>
+    <string name="yellow_button">Yellow Button</string>
+    <string name="red_button">Red Button</string>
+    <string name="menu_button">Menu Button</string>
+    <string name="hint_button">Hint Button</string>
+    <string name="textview">TextView</string>
+    <string name="score_row">score_row</string>
+
+</resources>
