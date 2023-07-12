@@ -11,7 +11,7 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-        Typeface tf = Typeface.createFromAsset(getAssets(),  "fonts/digital-dismay.otf");
+        Typeface tf = Typeface.createFromAsset(getAssets(),  "fonts/digitaldismay.otf");
         TextView gv = (TextView) findViewById(R.id.gameAbout_TextView);
         gv.setTypeface(tf);
     }
