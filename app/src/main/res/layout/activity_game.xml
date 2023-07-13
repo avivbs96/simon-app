@@ -14,14 +14,14 @@
 
 
     <ImageView
-        android:layout_width="120dp"
-        app:srcCompat="@drawable/center"
         android:id="@+id/imageView"
+        android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_centerInParent="true"
         android:clickable="false"
-        android:contentDescription="@string/start_text" />
+        android:contentDescription="@string/start_text"
+        app:srcCompat="@drawable/center"
+        tools:ignore="RedundantDescriptionCheck" />
 
     <TextView
         android:text="@string/_00"
@@ -33,7 +33,7 @@
         android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        />
+        tools:ignore="RelativeOverlap,VisualLintOverlap" />
 
     <TableLayout
 
@@ -49,28 +49,29 @@
             android:weightSum="2">
 
             <ImageButton
-                android:src="@drawable/green"
-                android:background="#00000000"
                 android:id="@+id/green_imageButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:adjustViewBounds="true"
                 android:layout_weight="1"
-                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
+                android:background="#00000000"
                 android:contentDescription="@string/green_button"
+                android:scaleType="fitXY"
+                android:src="@drawable/green"
 
-                />
+                tools:ignore="ImageContrastCheck,RedundantDescriptionCheck" />
 
             <ImageButton
-                android:src="@drawable/blue"
-                android:background="#00000000"
                 android:id="@+id/blue_imageButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
+                android:background="#00000000"
+                android:contentDescription="@string/blue_button"
                 android:scaleType="fitXY"
-                android:contentDescription="@string/blue_button" />
+                android:src="@drawable/blue"
+                tools:ignore="ImageContrastCheck,RedundantDescriptionCheck" />
         </TableRow>
 
         <TableRow
@@ -79,26 +80,28 @@
             android:weightSum="2">
 
             <ImageButton
-                android:src="@drawable/yellow"
-                android:background="#00000000"
                 android:id="@+id/yellow_imageButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
+                android:background="#00000000"
+                android:contentDescription="@string/yellow_button"
                 android:scaleType="fitXY"
-                android:contentDescription="@string/yellow_button" />
+                android:src="@drawable/yellow"
+                tools:ignore="RedundantDescriptionCheck" />
 
             <ImageButton
-                android:src="@drawable/red"
-                android:background="#00000000"
                 android:id="@+id/red_imageButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
+                android:background="#00000000"
+                android:contentDescription="@string/red_button"
                 android:scaleType="fitXY"
-                android:contentDescription="@string/red_button" />
+                android:src="@drawable/red"
+                tools:ignore="RedundantDescriptionCheck" />
 
         </TableRow>
     </TableLayout>
@@ -110,11 +113,12 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:background="#00000000"
+        android:contentDescription="@string/menu_button"
         android:onClick="popupMenu"
         android:padding="8dp"
         android:scaleType="fitXY"
         app:srcCompat="@drawable/menu"
-        android:contentDescription="@string/menu_button"/>
+        tools:ignore="UsingOnClickInXml,RedundantDescriptionCheck" />
         />
 
     <ImageButton
@@ -128,7 +132,8 @@
         android:elevation="0dp"
         android:padding="8dp"
         android:scaleType="fitXY"
-        app:srcCompat="@drawable/hint" />
+        app:srcCompat="@drawable/hint"
+        tools:ignore="RedundantDescriptionCheck" />
     />
 
     <TextView
@@ -147,7 +152,8 @@
         android:id="@+id/gameMode_textView"
         android:textSize="30sp"
         android:layout_alignBottom="@+id/menu_ImageButton"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        tools:ignore="RelativeOverlap" />
 
 
 </RelativeLayout>

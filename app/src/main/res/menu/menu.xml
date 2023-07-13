@@ -2,27 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/gameMode1"
-        android:title="Pattern Mode (Easy)"
+        android:title="@string/pattern_mode_easy"
         />
     <item
         android:id="@+id/gameMode2"
-        android:title="Random Mode (Medium)"
+        android:title="@string/random_mode_medium"
         />
-    <item
-        android:id="@+id/gameMode3"
-        android:title="Reverse Mode (Hard)"
-        />
+
     <item
         android:id="@+id/actionAbout"
-        android:title="Game Mode Details"
+        android:title="@string/game_mode_details"
         />
     <item
         android:id="@+id/actionRestart"
-        android:title="Restart"
+        android:title="@string/restart"
         />
     <item
         android:id="@+id/actionQuit"
-        android:title="Quit"
+        android:title="@string/quit"
         />
 
 </menu>

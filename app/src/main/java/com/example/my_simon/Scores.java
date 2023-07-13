@@ -1,9 +1,7 @@
 package com.example.my_simon;
 
 
-/**
- * Created by Daniel on 2/25/2017.
- */
+import androidx.annotation.NonNull;
 
 public class Scores {
     private String place;
@@ -41,6 +39,7 @@ public class Scores {
         this.score = score;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Scores{" +

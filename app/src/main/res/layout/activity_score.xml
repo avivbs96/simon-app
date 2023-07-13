@@ -10,16 +10,15 @@
     android:background="@drawable/background">
 
     <TextView
-        android:text="@string/highScore"
+        android:id="@+id/highScoreTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/highScoreTv"
-        android:textColor="@color/purple_700"
-        android:textSize="50sp"
-        android:textAlignment="center"
         android:layout_marginBottom="20dp"
-        android:textStyle="bold"
-        />
+        android:text="@string/highScore"
+        android:textAlignment="center"
+        android:textColor="#9FA8DA"
+        android:textSize="50sp"
+        android:textStyle="bold" />
 
     <ListView
         android:layout_width="match_parent"

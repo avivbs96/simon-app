@@ -1,6 +1,7 @@
 package com.example.my_simon;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,10 +9,8 @@ import android.graphics.Typeface;
 import android.media.AudioAttributes;
 import android.media.SoundPool;
 import android.os.AsyncTask;
-import android.os.Vibrator;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.appcompat.widget.PopupMenu;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuInflater;
@@ -22,19 +21,22 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Collections;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
+
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 import java.util.Vector;
 
+@SuppressWarnings("ALL")
 public class GameActivity extends AppCompatActivity
         implements View.OnTouchListener, PopupMenu.OnMenuItemClickListener {
 
     // VAR Declaration.
     Vector<Integer> userPattern = new Vector<>(), simonPattern = new Vector<>();
     private int tempo, count, score, hintCount, userChoice, choiceCount, gameMode;
-    private int colorButtons[], colorDrawable[], pressedDrawable[], soundID[];
+    private int[] colorButtons, colorDrawable, pressedDrawable, soundID;
     private FlashSimon flash;
     private CountDown countDown;
     private SoundPool soundPool;
@@ -49,6 +51,7 @@ public class GameActivity extends AppCompatActivity
     public static final int activityRef = 2000;
 
     // VAR Initialization.
+    @SuppressLint("ClickableViewAccessibility")
     private void setVariables() {
         SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
         gameMode = sharedPreferences.getInt(GAMEMODESP,1);
@@ -107,7 +110,7 @@ public class GameActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        soundsLoaded = new HashSet<Integer>();
+        soundsLoaded = new HashSet<>();
 
     }
 
@@ -140,15 +143,12 @@ public class GameActivity extends AppCompatActivity
         spBuilder.setAudioAttributes(attrBuilder.build());
         spBuilder.setMaxStreams(2);
         soundPool = spBuilder.build();
-        soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
-            @Override
-            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-                if (status == 0) {
-                    soundsLoaded.add(sampleId);
-                    Log.i("SOUND", "Sound loaded = " + sampleId);
-                } else {
-                    Log.i("SOUND", "Error cannot load sound status = " + status);
-                }
+        soundPool.setOnLoadCompleteListener((soundPool, sampleId, status) -> {
+            if (status == 0) {
+                soundsLoaded.add(sampleId);
+                Log.i("SOUND", "Sound loaded = " + sampleId);
+            } else {
+                Log.i("SOUND", "Error cannot load sound status = " + status);
             }
         });
         chooseGameMode();
@@ -186,15 +186,12 @@ public class GameActivity extends AppCompatActivity
     /**
      * chooseGameMode determines what game mode is chosen from the menu.
      */
+
     private void chooseGameMode() {
         setVariables();
 
         if (gameMode == 2) {
             setModeTextView("Random Mode");
-            countDown = new CountDown();
-            countDown.execute();
-        } else if (gameMode == 3) {
-            setModeTextView("Reuerse Mode");
             countDown = new CountDown();
             countDown.execute();
         } else {
@@ -275,6 +272,7 @@ public class GameActivity extends AppCompatActivity
     /**
      * FlashSimon flashes when Simon is choosing a pattern.
      */
+    @SuppressLint("StaticFieldLeak")
     class FlashSimon extends AsyncTask<Void, Void, Void> {
 
         /**
@@ -286,12 +284,9 @@ public class GameActivity extends AppCompatActivity
             for (int i = 0; i < simonPattern.size(); i++) {
                 final int y = simonPattern.get(i);
                 try {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            ImageButton flash = (ImageButton) findViewById(colorButtons[y]);
-                            flash.setImageResource(pressedDrawable[y]);
-                        }
+                    runOnUiThread(() -> {
+                        ImageButton flash = (ImageButton) findViewById(colorButtons[y]);
+                        flash.setImageResource(pressedDrawable[y]);
                     });
                     if (soundsLoaded.contains(soundID[y])) {
                         soundPool.play(soundID[y], 1.0f, 1.0f, 0, 0, 1.0f);
@@ -300,12 +295,9 @@ public class GameActivity extends AppCompatActivity
                         tempo -= 20;
                     }
                     Thread.sleep(tempo);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            ImageButton flash = (ImageButton) findViewById(colorButtons[y]);
-                            flash.setImageResource(colorDrawable[y]);
-                        }
+                    runOnUiThread(() -> {
+                        ImageButton flash = (ImageButton) findViewById(colorButtons[y]);
+                        flash.setImageResource(colorDrawable[y]);
                     });
                 } catch (InterruptedException e) {
                     Log.i("THREAD=====", "FLASH was interrupted");
@@ -332,6 +324,7 @@ public class GameActivity extends AppCompatActivity
     /**
      * CountDown counts down to 0 to ready the user.
      */
+    @SuppressLint("StaticFieldLeak")
     class CountDown extends AsyncTask<Void, String, Void> {
 
         int cdSound = soundID[4];
@@ -354,6 +347,8 @@ public class GameActivity extends AppCompatActivity
          *
          * @return null
          */
+        @SuppressWarnings("deprecation")
+
         @Override
         protected Void doInBackground(Void... voids) {
             String display;
@@ -377,6 +372,8 @@ public class GameActivity extends AppCompatActivity
         /**
          * onProgressUpdates updates the score display.
          */
+        @SuppressWarnings("deprecation")
+
         @Override
         protected void onProgressUpdate(String... values) {
             String display = values[0];
@@ -389,12 +386,15 @@ public class GameActivity extends AppCompatActivity
         /**
          * onPostExecute runs when game is over.
          */
+        @SuppressWarnings("deprecation")
+
         @Override
         protected void onPostExecute(Void aVoid) {
-            scoreTextView.setText("00");
+            scoreTextView.setText(R.string.score_default);
             simonsTurn();
         }
     }
+    @SuppressWarnings("deprecation")
 
     public void clearThreads(){
         if(countDown != null){
@@ -417,6 +417,8 @@ public class GameActivity extends AppCompatActivity
         /**
          * onClick tracks when the user uses a hint.
          */
+        @SuppressWarnings("deprecation")
+
         @Override
         public void onClick(View view) {
             if (hintCount >= 0) {
@@ -493,6 +495,7 @@ public class GameActivity extends AppCompatActivity
     /**
      * onTouch determines which button was clicked by the user.
      */
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
 
@@ -529,40 +532,39 @@ public class GameActivity extends AppCompatActivity
      *
      * @param item The menu item clicked.
      */
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         vb.vibrate(10);
         clearThreads();
 
-        if (item.getItemId() == R.id.gameMode1) {
-            gameMode = 1;
-            insertSharedPreference();
-            chooseGameMode();
-            return true;
-        } else if (item.getItemId() == R.id.gameMode2) {
-            gameMode = 2;
-            insertSharedPreference();
-            chooseGameMode();
-            return true;
-        } else if (item.getItemId() == R.id.gameMode3) {
-            gameMode = 3;
-            insertSharedPreference();
-            chooseGameMode();
-            return true;
-        } else if (item.getItemId() == R.id.actionAbout) {
-            Intent aboutIntent = new Intent(this, AboutActivity.class);
-            startActivity(aboutIntent);
-            return true;
-        } else if (item.getItemId() == R.id.actionRestart) {
-            chooseGameMode();
-            return true;
-        } else if (item.getItemId() == R.id.actionQuit) {
-            Intent aboutIntent = new Intent(this, HomeActivity.class);
-            startActivity(aboutIntent);
-            return true;
+        switch (item.getItemId()) {
+            case R.id.gameMode1:
+                gameMode = 1;
+                insertSharedPreference();
+                chooseGameMode();
+                return true;
+            case R.id.gameMode2:
+                gameMode = 2;
+                insertSharedPreference();
+                chooseGameMode();
+                return true;
+            case R.id.actionAbout:
+                Intent aboutIntent = new Intent(this, AboutActivity.class);
+                startActivity(aboutIntent);
+                return true;
+            case R.id.actionRestart:
+                chooseGameMode();
+                return true;
+            case R.id.actionQuit:
+                Intent homeIntent = new Intent(this, HomeActivity.class);
+                startActivity(homeIntent);
+                return true;
         }
+
         return false;
     }
+
 
     private void insertSharedPreference(){
 
@@ -589,15 +591,10 @@ public class GameActivity extends AppCompatActivity
      * seqCompare method does a simple check to see if user choice matches simon's pattern.
      */
     public void seqCompare() {
-        if (gameMode == 3) {
-            reversePattern();
-        }
+
         if (simonPattern.elementAt(choiceCount - 1).equals(userChoice)) {
             Log.i("Match", " simon: " + simonPattern.elementAt(choiceCount - 1) + " user: " + userChoice);
             match = true;
-            if (gameMode == 3) {
-                reversePattern();
-            }
         } else {
             Log.i("No Match", " simon: " + simonPattern.elementAt(choiceCount - 1) + " user: " + userChoice);
             match = false;
@@ -605,7 +602,4 @@ public class GameActivity extends AppCompatActivity
         }
     }
 
-    private void reversePattern(){
-        Collections.reverse(simonPattern);
-    }
 }

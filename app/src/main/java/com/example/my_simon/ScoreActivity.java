@@ -2,13 +2,9 @@ package com.example.my_simon;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.appcompat.widget.PopupMenu;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +14,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
@@ -37,9 +36,7 @@ public class ScoreActivity extends AppCompatActivity {
     private final String SCORE_FILENAME = "simonScores.txt";
     private final String DELIMITER = "<õ@Scores@õ>";
     private String name,score;
-    private String place = "0";
-    private final String ACTIVITYKEY = "calling-Activity";
-    private int currentLowestScore, adaptersize;
+    private int currentLowestScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,20 +132,12 @@ public class ScoreActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final EditText et= (EditText) view.findViewById(R.id.editText);
         builder.setView(view)
-                .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        name = et.getText().toString().trim();
-                        if(name == "") name = "Player Name";
-                        setScores();
-                    }
+                .setPositiveButton("Submit", (dialogInterface, i) -> {
+                    name = et.getText().toString().trim();
+                    if(name.equals("")) name = "Player Name";
+                    setScores();
                 })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Log.i("Canceled ","");
-                    }
-                });
+                .setNegativeButton("Cancel", (dialogInterface, i) -> Log.i("Canceled ",""));
         builder.create();
         builder.show();
 
@@ -163,6 +152,7 @@ public class ScoreActivity extends AppCompatActivity {
      * Calls write Data to save to file
      */
     private void setScores(){
+        String place = "0";
         Scores newScore = new Scores(place,name,score);
         scoresList.add(newScore);
         sortScores();
@@ -235,6 +225,7 @@ public class ScoreActivity extends AppCompatActivity {
      * Called by onCreate
      */
     public void checkCallingActivity(){
+        String ACTIVITYKEY = "calling-Activity";
         int callingActivity = getIntent().getIntExtra(ACTIVITYKEY, 0);
 
         if(callingActivity == 2000 ){//Home
@@ -254,21 +245,22 @@ public class ScoreActivity extends AppCompatActivity {
      * true for yes
      * flase for no
      */
-    private boolean madeItintoHighscore(){
+    private boolean madeItintoHighscore() {
         int s = getIntent().getIntExtra("score", 0);
         int size = scoresList.size();
 
-        if(s >= currentLowestScore && size == 25){
-            scoresList.remove(size);
+        if (s >= currentLowestScore && size == 25) {
+            scoresList.remove(size - 1); // Remove the last element in the list
             score = Integer.toString(s);
             return true;
-        }else if(size < 25 && s != 0){
+        } else if (size < 25 && s != 0) {
             score = Integer.toString(s);
             return true;
-        }else
+        } else {
             return false;
-
+        }
     }
+
 
     private void toast(String s){
         Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
@@ -286,7 +278,7 @@ public class ScoreActivity extends AppCompatActivity {
         scoreAdapter = new ScoreAdapter(getApplicationContext(), R.layout.score_row, scoresList);
         lv.setAdapter(scoreAdapter);
 
-        adaptersize = scoreAdapter.getCount();
+        int adaptersize = scoreAdapter.getCount();
         if(adaptersize != 0) {
             String currentLowestScoreString = scoresList.get(scoreAdapter.getCount() - 1).getScore();
             currentLowestScore = Integer.parseInt(currentLowestScoreString);
@@ -298,13 +290,13 @@ public class ScoreActivity extends AppCompatActivity {
      * This takes each List objects(scores) and places them
      * in the correct Textview of the Custom row layout(score_row.xml)
      */
-    public class ScoreAdapter extends ArrayAdapter{
+    public class ScoreAdapter extends ArrayAdapter<Scores> {
 
-        private List<Scores> sL;
-        private LayoutInflater inflater;
-        private int resource;
+        private final List<Scores> sL;
+        private final LayoutInflater inflater;
+        private final int resource;
 
-        ScoreAdapter(Context context, int resource, List objects){
+        ScoreAdapter(Context context, int resource,  List<Scores> objects){
             super(context, resource, objects);
 
             this.resource = resource;

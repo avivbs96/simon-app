@@ -13,7 +13,7 @@
     android:background="@drawable/background">
 
     <Button
-        android:text="High Scores"
+        android:text="@string/high_scores"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/score_button"
@@ -25,22 +25,25 @@
         android:layout_centerHorizontal="true" />
 
     <ImageButton
-        android:layout_height="wrap_content"
-        android:src="@drawable/play"
-        android:background="#00000000"
         android:id="@+id/start_imageButton"
         android:layout_width="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="#00000000"
+        android:contentDescription="@string/todo"
+        android:src="@drawable/play"
+        tools:ignore="ImageContrastCheck,DuplicateSpeakableTextCheck" />
 
     <ImageView
+        android:id="@+id/simon_imageView"
         android:layout_width="wrap_content"
         android:layout_height="125dp"
         app:srcCompat="@drawable/simon"
-        android:id="@+id/simon_imageView" />
+        tools:ignore="ImageContrastCheck"
+        android:contentDescription="@string/todo1" />
 
     <Button
-        android:text="About"
+        android:text="@string/about"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/about_button"
